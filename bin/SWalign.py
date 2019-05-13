@@ -169,8 +169,8 @@ def test():
         print('\n'.join(lines))
         print('\n')
     print('-' * 24)
-    seq1 = 'ATAATGTATGGCTGCGACGTGGGGCCGGACGGGCGCTTCCTCCGCGGGTACCGGCAGGAC'
-    seq2 = 'ATAATGTATGGCTGCGATGTGGGGCCGGACGGGCGCATCCTCCGCGGGTACCGGCAGGAC'
+    seq1 = 'CGCTGCGGGAGCGGAGCGGGTCGGTGCGGCCGG'
+    seq2 = 'CGCTGCGGGAGCGGCTGCCGGGGTCGGTGCGGCCGG'
     sw = SWAlign(seq1, seq2)
     print(sw.align_pos)
     print(sw.align_query)
