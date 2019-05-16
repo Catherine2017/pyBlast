@@ -1,23 +1,24 @@
-"""This SW alignment."""
+"""
+This is Smith–Waterman algorithm.
+See more on https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm.
+"""
+
+from align import Align
 
 
-class SWAlign(object):
+class SWAlign(Align):
     """SW alignment for two sequence."""
 
     equal_val = 3
     unequ_val = -3
     gap_value = -2
 
-    def __init__(self, query, target, match_score=3, mis_score=2,
-                 gap_score=-1):
+    def __init__(self, query, target):
         """Init class."""
         self.query = query
         self.target = target
         self.query_len = len(query)
         self.target_len = len(target)
-        self.match_score = match_score
-        self.mis_score = mis_score
-        self.gap_score = gap_score
         self.alignment()
 
     def alignment(self):
@@ -74,9 +75,13 @@ class SWAlign(object):
                     pos.append((0, y))
                 x = x1
                 y = y1
+                print(self.maxtrix[x][y])
+                if self.maxtrix[x][y] == 0:
+                    break
             pos.reverse()
+            """
             if pos[0][0] == 0 or pos[0][1] == 0:
-                del pos[0]
+                del pos[0]"""
             # 计算比对分值
             score = 0
             align_query, align_target = '', ''
@@ -87,11 +92,11 @@ class SWAlign(object):
                 align_target += xunit
                 if xval != 0 and yval != 0:
                     if xunit == yunit:
-                        score += self.match_score
+                        score += self.equal_val
                     else:
-                        score += self.mis_score
+                        score += self.unequ_val
                 else:
-                    score += self.gap_score
+                    score += self.gap_value
             align_info.setdefault(score, []).append({
                 'align_pos': pos, 'align_query': align_query,
                 'align_target': align_target})

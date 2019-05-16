@@ -1,0 +1,2 @@
+class Align(object):
+    pass
