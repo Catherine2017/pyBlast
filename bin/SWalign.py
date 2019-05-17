@@ -1,5 +1,6 @@
 """
 This is Smith–Waterman algorithm.
+
 See more on https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm.
 """
 
