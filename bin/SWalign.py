@@ -31,10 +31,10 @@ class SWAlign(Align):
                     val = 0
                 tmp.append(val)
             self.maxtrix.append(tmp)
+        # 获得矩阵和最大值对应的坐标
         max_info = []
         self.traback = {}
         max_val = 0
-        # 获得矩阵和最大值对应的坐标
         for i in range(1, self.target_len + 1):
             for j in range(1, self.query_len + 1):
                 tmpvalue = self.subs_matrix[self.target[i-1]][self.query[j-1]]
