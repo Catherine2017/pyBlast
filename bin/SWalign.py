@@ -75,12 +75,8 @@ class SWAlign(Align):
                     pos.append((x, 0))
                 else:
                     pos.append((0, y))
-<<<<<<< HEAD
-=======
                 x = x1
                 y = y1
->>>>>>> 1e4db8ca882df9a71ee7afe258882788521520c0
-                print(self.maxtrix[x][y])
                 if self.maxtrix[x][y] == 0:
                     break
             pos.reverse()
