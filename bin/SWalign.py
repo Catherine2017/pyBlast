@@ -60,23 +60,27 @@ class SWAlign(object):
                 elif self.maxtrix[i][j] == max_val:
                     max_info.append((i, j))
         align_info = {}
+        print(self.maxtrix)
         # 回溯发现比对路径
         for tmp in max_info:
             x, y = tmp
             pos = []
             while x >= 1 and y >= 1:
                 x1, y1 = self.traback[(x, y)]
+                print(self.maxtrix[x][y])
                 if x1 == x - 1 and y1 == y - 1:
                     pos.append((x, y))
                 elif x1 == x - 1:
                     pos.append((x, 0))
                 else:
                     pos.append((0, y))
-                x = x1
-                y = y1
+                print(self.maxtrix[x][y])
+                if self.maxtrix[x][y] == 0:
+                    break
             pos.reverse()
+            """
             if pos[0][0] == 0 or pos[0][1] == 0:
-                del pos[0]
+                del pos[0]"""
             # 计算比对分值
             score = 0
             align_query, align_target = '', ''
