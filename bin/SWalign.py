@@ -13,7 +13,7 @@ class SWAlign(Align):
     def __init__(self, query, target, subs_matrix='../matrices/NUC.4.4',
                  gap_penatly=(-2,)):
         """Init class."""
-        super().__init__(query, target, subs_matrix)
+        super().__init__(query, target, subs_matrix, gap_penatly)
         if len(gap_penatly) == 1:
             self.do_alignment_linear(gap_penatly[0])
         elif len(gap_penatly) == 2:
@@ -78,17 +78,7 @@ class SWAlign(Align):
             if pos[0][0] == 0 or pos[0][1] == 0:
                 del pos[0]"""
             # 计算比对分值
-            score = 0
-            align_query, align_target = '', ''
-            for xval, yval in pos:
-                xunit = self.get_seq(self.target, xval)
-                yunit = self.get_seq(self.query, yval)
-                align_query += yunit
-                align_target += xunit
-                if xval != 0 and yval != 0:
-                    score += self.subs_matrix[xunit][yunit]
-                else:
-                    score += gap_value
+            score, align_query, align_target = self.get_score(pos)
             align_info.setdefault(score, []).append({
                 'align_pos': pos, 'align_query': align_query,
                 'align_target': align_target})

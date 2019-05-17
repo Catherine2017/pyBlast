@@ -13,7 +13,7 @@ class NWalign(Align):
     def __init__(self, query, target, subs_matrix='../matrices/NUC.4.4',
                  gap_penatly=(-2,)):
         """Init class."""
-        super().__init__(query, target, subs_matrix)
+        super().__init__(query, target, subs_matrix, gap_penatly)
         if len(gap_penatly) == 1:
             self.do_alignment_linear(gap_penatly[0])
         elif len(gap_penatly) == 2:
@@ -23,7 +23,6 @@ class NWalign(Align):
         """Do NW alignment by linear gap penalty."""
         # 初始化矩阵
         self.maxtrix = []
-        
 
     def do_alignment_affine(gap_open, gap_exten):
         """Do NW alignment by affine gap penalty."""

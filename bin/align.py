@@ -10,7 +10,7 @@ import re
 class Align(object):
     """Show alignment for two sequence."""
 
-    def __init__(self, query, target, subs_matrix):
+    def __init__(self, query, target, subs_matrix, gap_penatly):
         """Init class."""
         self.load_subsmatrix(subs_matrix)
         checkset = set(self.subs_matrix.keys())
@@ -22,6 +22,7 @@ class Align(object):
         self.align_pos = []
         self.align_query = ''
         self.align_target = ''
+        self.gap_penatly = gap_penatly
 
     def load_subsmatrix(self, matrixfile):
         """Load substitution matrix file."""
@@ -88,3 +89,24 @@ class Align(object):
             return seq[tmppos-1]
         else:
             return '-'
+
+    def get_score(self, pos):
+        """Calculate score for alignment."""
+        score = 0
+        gap_count = 0
+        align_query, align_target = '', ''
+        for xval, yval in pos:
+            xunit = self.get_seq(self.target, xval)
+            yunit = self.get_seq(self.query, yval)
+            align_query += yunit
+            align_target += xunit
+            if xval != 0 and yval != 0:
+                score += self.subs_matrix[xunit][yunit]
+                gap_count = 0
+            else:
+                gap_count += 1
+                if gap_count > 1 and len(self.gap_penatly) > 1:
+                        score += self.gap_penatly[1]
+                else:
+                    score += self.gap_penatly[0]
+        return score, align_query, align_target
