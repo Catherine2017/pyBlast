@@ -108,5 +108,5 @@ class Align(object):
                 if gap_count > 1 and len(self.gap_penatly) > 1:
                         score += self.gap_penatly[1]
                 else:
-                    score += self.gap_penatly[0]
+                    score += self.gap_penatly[0] + self.gap_penatly[1]
         return score, align_query, align_target
