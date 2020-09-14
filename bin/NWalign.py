@@ -73,7 +73,7 @@ class NWalign(Align):
         self.align_query = ''.join(align_query[::-1])
         self.align_target = ''.join(align_target[::-1])
 
-    def do_alignment_affine(gap_open, gap_exten):
+    def do_alignment_affine(self, gap_open, gap_exten):
         """Do NW alignment by affine gap penalty."""
         pass
 
